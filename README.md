@@ -20,3 +20,22 @@ volatile uint8_t dma_done = 1;
 // 7-segment mapping (common cathode)
 const uint8_t seg_map[] = {0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F};
 
+// ---------------- Function Prototypes ----------------
+void SystemClock_Config(void);
+void GPIO_Init(void);
+void TIM2_Init(void);
+void DMA_Init(void);
+void WS2812_Init(void);
+void WS2812_SetPixel(uint16_t pixel, uint8_t r, uint8_t g, uint8_t b);
+void WS2812_Show(void);
+
+void Fast_Delay(uint32_t ms);
+void Delay_ms(uint32_t ms);
+
+// ---------------- Main ----------------
+int main(void){
+    SystemClock_Config();
+    GPIO_Init();
+    TIM2_Init();
+    DMA_Init();
+    WS2812_Init();
