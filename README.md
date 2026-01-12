@@ -151,6 +151,13 @@ void DMA1_Stream1_IRQHandler(void){
     }
 }
 
+// ---------------- 7-Segment Functions ----------------
+void Display_Double_Digit(int value){
+    int tens = value/10;
+    int ones = value%10;
+    GPIOC->ODR = (seg_map[tens]<<8)|seg_map[ones];
+}
+
 void Fast_Delay(uint32_t ms){
     for(uint32_t i=0;i<ms*1500;i++) __NOP();
 }
@@ -170,6 +177,14 @@ void GPIO_Init(void){
     GPIOB->AFR[1] &= ~(0xF<<8);
     GPIOB->AFR[1] |= (1<<8);      
     
+}
+
+// 7-segment (PC0-PC15)
+    GPIOC->MODER &= ~(0xFFFFFFFF);     
+    GPIOC->MODER |= 0x55555555;        
+    GPIOC->OTYPER &= ~(0xFFFF);        
+    GPIOC->OSPEEDR |= 0xFFFFFFFF;      
+    GPIOC->PUPDR &= ~(0xFFFFFFFF);     
 }
 
 void TIM2_Init(void){
