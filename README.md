@@ -176,8 +176,6 @@ void GPIO_Init(void){
     GPIOB->OSPEEDR |= (3U<<20);   
     GPIOB->AFR[1] &= ~(0xF<<8);
     GPIOB->AFR[1] |= (1<<8);      
-    
-}
 
 // 7-segment (PC0-PC15)
     GPIOC->MODER &= ~(0xFFFFFFFF);     
