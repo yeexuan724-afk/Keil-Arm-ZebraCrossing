@@ -45,7 +45,6 @@ int main(void){
 // ---------------- BUZZER GPIO ----------------
     GPIOD->MODER |= (1U << (BUZZER_PIN*2));  // BUZZER -> PD2 output
 
-
-    // Configure PA2 as input with pull-down for button
+// Configure PA2 as input with pull-down for button
     GPIOA->MODER &= ~(3U << (BUTTON_PIN*2));
     GPIOA->PUPDR |= (2U << (BUTTON_PIN*2));
