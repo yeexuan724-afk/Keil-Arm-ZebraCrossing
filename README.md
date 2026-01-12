@@ -3,6 +3,8 @@
 
 // ---------------- Configuration ----------------
 #define NUM_LEDS        5
+#define BUZZER_PIN      2      //PD2
+#define BUTTON_PIN      2   // PA2
 
 // WS2812 DMA settings
 #define DMA_BUFFER_SIZE (50 + (NUM_LEDS*24) + 50) // Reset slots + LED data + reset
@@ -15,4 +17,4 @@ uint8_t led_data[NUM_LEDS*3];
 uint32_t pwm_buffer[DMA_BUFFER_SIZE];
 volatile uint8_t dma_done = 1;
 
-#define BUZZER_PIN      2      //PD2
+
