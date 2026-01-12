@@ -48,3 +48,19 @@ int main(void){
 // Configure PA2 as input with pull-down for button
     GPIOA->MODER &= ~(3U << (BUTTON_PIN*2));
     GPIOA->PUPDR |= (2U << (BUTTON_PIN*2));
+
+   while(1){
+        // ---------------- IDLE ----------------
+        for(int i=0;i<NUM_LEDS;i++) WS2812_SetPixel(i, 150,0,0); // Red
+        WS2812_Show();
+
+                    // ---------- Phase 2: 10s countdown, green ----------
+            for(int i=0;i<NUM_LEDS;i++) WS2812_SetPixel(i, 0,150,0); // Green
+            WS2812_Show();
+
+                    // ---------- Phase 3: back to Red ----------
+            for(int i=0;i<NUM_LEDS;i++) WS2812_SetPixel(i, 150,0,0); // Red
+            WS2812_Show();
+        }
+    }
+}
