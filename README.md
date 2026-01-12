@@ -28,7 +28,7 @@ void DMA_Init(void);
 void WS2812_Init(void);
 void WS2812_SetPixel(uint16_t pixel, uint8_t r, uint8_t g, uint8_t b);
 void WS2812_Show(void);
-
+void Display_Double_Digit(int value);
 void Fast_Delay(uint32_t ms);
 void Delay_ms(uint32_t ms);
 
