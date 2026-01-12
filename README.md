@@ -31,6 +31,8 @@ void WS2812_Show(void);
 void Display_Double_Digit(int value);
 void Fast_Delay(uint32_t ms);
 void Delay_ms(uint32_t ms);
+void Buzzer_Continuous(uint32_t duration_ms, uint32_t pulse_ms);
+
 
 // ---------------- Main ----------------
 int main(void){
@@ -39,3 +41,6 @@ int main(void){
     TIM2_Init();
     DMA_Init();
     WS2812_Init();
+
+// ---------------- BUZZER GPIO ----------------
+    GPIOD->MODER |= (1U << (BUZZER_PIN*2));  // BUZZER -> PD2 output
