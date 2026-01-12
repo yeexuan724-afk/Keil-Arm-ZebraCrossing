@@ -15,3 +15,4 @@ uint8_t led_data[NUM_LEDS*3];
 uint32_t pwm_buffer[DMA_BUFFER_SIZE];
 volatile uint8_t dma_done = 1;
 
+#define BUZZER_PIN      2      //PD2
