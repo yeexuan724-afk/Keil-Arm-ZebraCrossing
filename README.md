@@ -53,10 +53,25 @@ int main(void){
         // ---------------- IDLE ----------------
         for(int i=0;i<NUM_LEDS;i++) WS2812_SetPixel(i, 150,0,0); // Red
         WS2812_Show();
+        Display_Double_Digit(0);
+
+// Wait for button press
+        if(GPIOA->IDR & (1U << BUTTON_PIN)){
+            // ---------- Phase 1: 5s countdown, red ----------
+            for(int i=5;i>=0;i--){
+                Display_Double_Digit(i);
+                Delay_ms(600); // Slightly faster countdown (~0.6s)
+            }
+
 
                     // ---------- Phase 2: 10s countdown, green ----------
             for(int i=0;i<NUM_LEDS;i++) WS2812_SetPixel(i, 0,150,0); // Green
             WS2812_Show();
+            
+            for(int i=10;i>=0;i--){
+                Display_Double_Digit(i);
+
+             }
 
                     // ---------- Phase 3: back to Red ----------
             for(int i=0;i<NUM_LEDS;i++) WS2812_SetPixel(i, 150,0,0); // Red
