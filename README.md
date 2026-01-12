@@ -17,4 +17,6 @@ uint8_t led_data[NUM_LEDS*3];
 uint32_t pwm_buffer[DMA_BUFFER_SIZE];
 volatile uint8_t dma_done = 1;
 
+// 7-segment mapping (common cathode)
+const uint8_t seg_map[] = {0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F};
 
