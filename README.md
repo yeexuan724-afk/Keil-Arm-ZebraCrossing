@@ -42,7 +42,7 @@ int main(void){
     DMA_Init();
     WS2812_Init();
 
-// ---------------- BUZZER GPIO ----------------
+// Configure PD2 as output for buzzer
     GPIOD->MODER |= (1U << (BUZZER_PIN*2));  // BUZZER -> PD2 output
 
 // Configure PA2 as input with pull-down for button
@@ -63,20 +63,39 @@ int main(void){
                 Delay_ms(600); // Slightly faster countdown (~0.6s)
             }
 
-
-                    // ---------- Phase 2: 10s countdown, green ----------
+            // ---------- Phase 2: 10s countdown, green ----------
             for(int i=0;i<NUM_LEDS;i++) WS2812_SetPixel(i, 0,150,0); // Green
             WS2812_Show();
             
             for(int i=10;i>=0;i--){
                 Display_Double_Digit(i);
+                
+                // Determine buzzer speed
+                uint32_t pulse_time = (i<=4)? 40 : 80; // faster pulses
 
+                // Pulse buzzer continuously during this countdown tick (~0.8s per tick)
+                Buzzer_Continuous(800, pulse_time);
              }
+            
+            // Turn off buzzer
+            GPIOD->ODR &= ~(1U << BUZZER_PIN);
 
-                    // ---------- Phase 3: back to Red ----------
+            // ---------- Phase 3: back to Red ----------
             for(int i=0;i<NUM_LEDS;i++) WS2812_SetPixel(i, 150,0,0); // Red
             WS2812_Show();
         }
+    }
+}
+
+// ---------------- Buzzer Continuous Pulse ----------------
+void Buzzer_Continuous(uint32_t duration_ms, uint32_t pulse_ms){
+    uint32_t elapsed = 0;
+    while(elapsed < duration_ms){
+        GPIOD->ODR |= (1U << BUZZER_PIN);
+        Fast_Delay(pulse_ms);
+        GPIOD->ODR &= ~(1U << BUZZER_PIN);
+        Fast_Delay(pulse_ms);
+        elapsed += 2*pulse_ms;
     }
 }
 
