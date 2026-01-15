@@ -212,3 +212,5 @@ void SystemClock_Config(void){
     RCC->CFGR |= RCC_CFGR_SW_HSI;
     while(((RCC->CFGR & RCC_CFGR_SWS)>>2)!=0);
 }
+
+
